@@ -25,7 +25,22 @@ router.get("/", async (req, res) => {
 });
 
 // GET A THE TODOS
-router.get("/:id", async (req, res) => {});
+router.get("/:id", async (req, res) => {
+  try {
+    const result = await Todo.find({ _id: req.params.id }).select({
+      _id: 0,
+      __v: 0,
+      date: 0,
+    });
+    res.json({
+      todos: result,
+    });
+  } catch (err) {
+    res.status(500).send({
+      message: err.message,
+    });
+  }
+});
 // PORT A TODOS
 router.post("/", async (req, res) => {
   const newTodo = new Todo(req.body);
