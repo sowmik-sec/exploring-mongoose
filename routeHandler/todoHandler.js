@@ -5,7 +5,24 @@ const todoSchema = require("../schemas/todoSchema");
 const Todo = new mongoose.model("Todo", todoSchema);
 
 // GET ALL THE TODOS
-router.get("/", async (req, res) => {});
+router.get("/", async (req, res) => {
+  try {
+    const result = await Todo.find({ status: "active" })
+      .select({
+        _id: 0,
+        __v: 0,
+        date: 0,
+      })
+      .limit(1);
+    res.json({
+      todos: result,
+    });
+  } catch (err) {
+    res.status(500).send({
+      message: err.message,
+    });
+  }
+});
 
 // GET A THE TODOS
 router.get("/:id", async (req, res) => {});
