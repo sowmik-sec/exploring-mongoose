@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
 app.use(express.json());
+const todoHandler = require("./routeHandler/todoHandler");
 
 mongoose
   .connect(
@@ -9,6 +10,8 @@ mongoose
   )
   .then(() => console.log("Database connection established"))
   .catch((err) => console.log(err));
+
+app.use("/todo", todoHandler);
 
 app.listen(5000, () => {
   console.log("Server is listening at port 5000");
