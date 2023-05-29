@@ -40,12 +40,16 @@ router.post("/all", async (req, res) => {
 // PUT TODO
 router.put("/:id", async (req, res) => {
   try {
-    await Todo.updateOne(
+    await Todo.findByIdAndUpdate(
       { _id: req.params.id },
       {
         $set: {
-          status: "inactive",
+          status: "active",
         },
+      },
+      {
+        useFindAndModify: false,
+        new: true,
       }
     );
     res.status(200).json({
