@@ -9,8 +9,20 @@ router.get("/", async (req, res) => {});
 
 // GET A THE TODOS
 router.get("/:id", async (req, res) => {});
-// PORT  TODOS
-router.post("/", async (req, res) => {});
+// PORT A TODOS
+router.post("/", async (req, res) => {
+  const newTodo = new Todo(req.body);
+  try {
+    await newTodo.save();
+    res.status(200).json({
+      message: "Todo was inserted successfully",
+    });
+  } catch (error) {
+    res.status(500).json({
+      error: "There was a server side error!",
+    });
+  }
+});
 
 // POST MULTIPLE TODO
 router.post("/all", async (req, res) => {});
