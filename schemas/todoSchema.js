@@ -16,9 +16,17 @@ const todoSchema = mongoose.Schema({
   },
 });
 
+// instance methods
 todoSchema.methods = {
   findActive: function () {
     return mongoose.model("Todo").find({ status: "active" });
+  },
+};
+
+// static methods
+todoSchema.statics = {
+  findByJS: function () {
+    return this.find({ title: /trip/i });
   },
 };
 
