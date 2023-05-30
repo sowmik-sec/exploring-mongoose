@@ -30,4 +30,11 @@ todoSchema.statics = {
   },
 };
 
+// query helpers
+todoSchema.query = {
+  byTrip: function (trip) {
+    return this.find({ title: new RegExp(trip, "i") });
+  },
+};
+
 module.exports = todoSchema;

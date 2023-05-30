@@ -40,6 +40,13 @@ router.get("/js", async (req, res) => {
     data,
   });
 });
+// GET TODOS BY TRIP
+router.get("/trip", async (req, res) => {
+  const data = await Todo.find().byTrip("trip");
+  res.status(200).json({
+    data,
+  });
+});
 
 // GET A THE TODOS
 router.get("/:id", async (req, res) => {
